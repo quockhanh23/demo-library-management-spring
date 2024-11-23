@@ -1,34 +1,39 @@
 package com.example.demo_library_management.controller;
 
+import com.example.demo_library_management.models.PageBook;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/api/pages")
+@RequestMapping("/api/page-books")
 public class PageController {
 
-    @GetMapping("/get-all-pages")
+    @GetMapping("/get-all-page-books")
     public ResponseEntity<?> getAllPages() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/get-one")
-    public ResponseEntity<?> getDetailPage(Long pageId) {
+    public ResponseEntity<?> getDetailPageBook(Long pageId) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/add-new")
-    public ResponseEntity<?> addNewPage() {
+    @PostMapping("/add-new-page-books")
+    public ResponseEntity<?> addNewPageBook() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete")
-    public ResponseEntity<?> deletePage() {
+    @PutMapping("/update-page-books")
+    public ResponseEntity<?> updatePageBooks(List<PageBook> pageBooks) {
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deletePageBook() {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -5,6 +5,11 @@ import com.example.demo_library_management.repository.BookRepository;
 import com.example.demo_library_management.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +19,27 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void createBook(Book book) {
+        bookRepository.save(book);
+    }
 
+    @Override
+    public void deleteBook(Long idBook) {
+        bookRepository.deleteById(idBook);
+    }
+
+    @Override
+    public List<Book> getAllBook() {
+        List<Book> bookList = bookRepository.findAll();
+        if (CollectionUtils.isEmpty(bookList)) return new ArrayList<>();
+        return bookList;
+    }
+
+    @Override
+    public Book getDetailBook(Long idBook) {
+        Optional<Book> bookOptional = bookRepository.findById(idBook);
+        if (bookOptional.isEmpty()) {
+            throw new RuntimeException("Không tồn tại");
+        }
+        return bookOptional.get();
     }
 }

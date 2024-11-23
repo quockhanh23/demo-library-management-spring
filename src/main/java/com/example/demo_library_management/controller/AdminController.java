@@ -29,7 +29,7 @@ public class AdminController {
         return new ResponseEntity<>(memberList, HttpStatus.OK);
     }
 
-    @GetMapping("/change-staus")
+    @GetMapping("/change-status")
     public ResponseEntity<?> changeStatusMember(Long idMember, String status) {
         adminService.upDateStatusMember(idMember, status);
         return new ResponseEntity<>(HttpStatus.OK);
