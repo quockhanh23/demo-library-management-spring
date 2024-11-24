@@ -1,7 +1,6 @@
 package com.example.demo_library_management.controller;
 
 import com.example.demo_library_management.dto.MemberDTO;
-import com.example.demo_library_management.models.Book;
 import com.example.demo_library_management.models.Member;
 import com.example.demo_library_management.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +32,9 @@ public class MemberController {
     }
 
     @PutMapping("/update-member")
-    public ResponseEntity<?> updateMember(Book book) {
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> updateMember(Long idMember, Member member) {
+        Member updateMember = memberService.updateMember(idMember, member);
+        return new ResponseEntity<>(updateMember, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")

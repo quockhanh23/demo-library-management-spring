@@ -1,5 +1,8 @@
 package com.example.demo_library_management.controller;
 
+import com.example.demo_library_management.models.Transaction;
+import com.example.demo_library_management.service.TransactionService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -7,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/transactions")
+@RequiredArgsConstructor
 public class TransactionController {
+
+    private final TransactionService transactionService;
 
     @GetMapping("/get-all-transactions")
     public ResponseEntity<?> getAllTransactions() {
@@ -16,16 +22,24 @@ public class TransactionController {
 
     @GetMapping("/get-one")
     public ResponseEntity<?> getDetailTransaction(Long transactionId) {
-        return new ResponseEntity<>(HttpStatus.OK);
+        Transaction transaction = transactionService.findById(transactionId);
+        return new ResponseEntity<>(transaction, HttpStatus.OK);
     }
 
     @PostMapping("/add-new")
-    public ResponseEntity<?> addNewTransaction() {
+    public ResponseEntity<?> addNewTransaction(Transaction transaction) {
+        transactionService.createTransaction(transaction);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("/update-transaction")
+    public ResponseEntity<?> updateTransaction(Long idTransaction, Transaction transaction) {
+        transactionService.updateTransaction(idTransaction, transaction);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteTransactions() {
+    public ResponseEntity<?> deleteTransactions(Long idTransaction) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

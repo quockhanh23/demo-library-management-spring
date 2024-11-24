@@ -3,6 +3,10 @@ package com.example.demo_library_management.controller;
 import com.example.demo_library_management.models.Book;
 import com.example.demo_library_management.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +20,12 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping("/get-all-books")
-    public ResponseEntity<?> getAllBooks() {
-        return new ResponseEntity<>(bookService.getAllBook(), HttpStatus.OK);
+    public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0", required = false) int page,
+                                    @RequestParam(defaultValue = "10", required = false) int size) {
+        Sort sort = Sort.by("createdAt").descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Book> books = bookService.findAll(pageable);
+        return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
     @GetMapping("/get-one")
@@ -32,7 +40,8 @@ public class BookController {
     }
 
     @PutMapping("/update-book")
-    public ResponseEntity<?> updateBook(Book book) {
+    public ResponseEntity<?> updateBook(Long bookId, Book book) {
+        bookService.updateBook(bookId, book);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

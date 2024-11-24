@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,4 +25,6 @@ public class Book {
     private String publisher;
     private int yearPublished;
     private boolean isAvailable;
+    private Date createdAt;
+    private Date updatedAt;
 }

@@ -24,4 +24,7 @@ public class Transaction {
     private Long bookId;
     private Date transactionDate;
     private Date returnDate;
+    private String status;
+    private Date createdAt;
+    private Date updatedAt;
 }
