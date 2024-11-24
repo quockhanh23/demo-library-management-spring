@@ -1,6 +1,5 @@
 package com.example.demo_library_management.models;
 
-import com.example.demo_library_management.common.MemberStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,17 +16,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Member {
+public class View {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String password;
-    private String confirmPassword;
-    private String email;
-    private String phoneNumber;
-    private MemberStatus status;
+    private Long idBook;
+    private Long idMember;
     private Date createdAt;
-    private Date updatedAt;
-    private String avatar;
 }

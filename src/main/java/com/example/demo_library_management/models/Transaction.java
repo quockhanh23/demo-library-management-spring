@@ -1,5 +1,6 @@
 package com.example.demo_library_management.models;
 
+import com.example.demo_library_management.common.TransactionStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class Transaction {
     private Long bookId;
     private Date transactionDate;
     private Date returnDate;
-    private String status;
     private Date createdAt;
     private Date updatedAt;
+    private TransactionStatus status;
 }

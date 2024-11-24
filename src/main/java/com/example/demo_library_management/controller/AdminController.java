@@ -1,5 +1,6 @@
 package com.example.demo_library_management.controller;
 
+import com.example.demo_library_management.common.MemberStatus;
 import com.example.demo_library_management.models.Member;
 import com.example.demo_library_management.service.AdminService;
 import com.example.demo_library_management.service.MemberService;
@@ -31,7 +32,7 @@ public class AdminController {
     }
 
     @GetMapping("/change-status")
-    public ResponseEntity<?> changeStatusMember(Long idMember, String status) {
+    public ResponseEntity<?> changeStatusMember(Long idMember, MemberStatus status) {
         adminService.upDateStatusMember(idMember, status);
         return new ResponseEntity<>(HttpStatus.OK);
     }

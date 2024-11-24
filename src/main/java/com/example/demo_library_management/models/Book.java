@@ -27,4 +27,5 @@ public class Book {
     private boolean isAvailable;
     private Date createdAt;
     private Date updatedAt;
+    private String coverPhoto;
 }

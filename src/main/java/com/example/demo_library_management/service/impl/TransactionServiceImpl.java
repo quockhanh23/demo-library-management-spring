@@ -1,5 +1,7 @@
 package com.example.demo_library_management.service.impl;
 
+import com.example.demo_library_management.common.TransactionStatus;
+import com.example.demo_library_management.constant.Constants;
 import com.example.demo_library_management.models.Transaction;
 import com.example.demo_library_management.repository.TransactionRepository;
 import com.example.demo_library_management.service.TransactionService;
@@ -18,7 +20,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void createTransaction(Transaction transaction) {
         transaction.setCreatedAt(new Date());
-        transaction.setStatus("");
+        transaction.setStatus(TransactionStatus.PROGRESS);
         transactionRepository.save(transaction);
     }
 
@@ -28,14 +30,14 @@ public class TransactionServiceImpl implements TransactionService {
         oldTransaction.setUpdatedAt(new Date());
         oldTransaction.setReturnDate(transaction.getReturnDate());
         transactionRepository.save(transaction);
-        return null;
+        return oldTransaction;
     }
 
     @Override
     public Transaction findById(Long idTransaction) {
         Optional<Transaction> transactionOptional = transactionRepository.findById(idTransaction);
         if (transactionOptional.isEmpty()) {
-            throw new RuntimeException("Không tìm thấy");
+            throw new RuntimeException(Constants.NOT_FOUND);
         }
         return transactionOptional.get();
     }

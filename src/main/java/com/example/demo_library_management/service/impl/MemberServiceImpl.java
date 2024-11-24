@@ -1,5 +1,7 @@
 package com.example.demo_library_management.service.impl;
 
+import com.example.demo_library_management.common.MemberStatus;
+import com.example.demo_library_management.constant.Constants;
 import com.example.demo_library_management.models.Member;
 import com.example.demo_library_management.repository.MemberRepository;
 import com.example.demo_library_management.service.MemberService;
@@ -20,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void createMember(Member member) {
         member.setCreatedAt(new Date());
+        member.setStatus(MemberStatus.ACTIVE);
         memberRepository.save(member);
     }
 
@@ -33,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
     public Member findById(Long idMember) {
         Optional<Member> memberOptional = memberRepository.findById(idMember);
         if (memberOptional.isEmpty()) {
-            throw new RuntimeException("Không tìm thấy người dùng có id là: " + idMember);
+            throw new RuntimeException(Constants.NOT_FOUND + idMember);
         }
         return memberOptional.get();
     }
