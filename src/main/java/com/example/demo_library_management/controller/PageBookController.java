@@ -17,7 +17,7 @@ import java.util.List;
 @CrossOrigin("*")
 @RequestMapping("/api/page-books")
 @RequiredArgsConstructor
-public class PageController {
+public class PageBookController {
 
     private final PageBookService pageBookService;
 
@@ -32,7 +32,8 @@ public class PageController {
     }
 
     @GetMapping("/get-one")
-    public ResponseEntity<?> getDetailPageBook(Long pageId) {
+    public ResponseEntity<?> getDetailPageBook(Long idPageBook) {
+        PageBook pageBook = pageBookService.findById(idPageBook);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

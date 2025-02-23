@@ -41,4 +41,9 @@ public class TransactionServiceImpl implements TransactionService {
         }
         return transactionOptional.get();
     }
+
+    @Override
+    public void deleteHardTransaction(Long idTransaction) {
+        transactionRepository.deleteById(idTransaction);
+    }
 }

@@ -34,12 +34,13 @@ public class TransactionController {
 
     @PutMapping("/update-transaction")
     public ResponseEntity<?> updateTransaction(Long idTransaction, Transaction transaction) {
-        transactionService.updateTransaction(idTransaction, transaction);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Transaction transactionUpdate = transactionService.updateTransaction(idTransaction, transaction);
+        return new ResponseEntity<>(transactionUpdate, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteTransactions(Long idTransaction) {
+    @DeleteMapping("/delete-hard")
+    public ResponseEntity<?> deleteHardTransaction(Long idTransaction) {
+        transactionService.deleteHardTransaction(idTransaction);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -9,4 +9,6 @@ public interface TransactionService {
     Transaction updateTransaction(Long idTransaction, Transaction transaction);
 
     Transaction findById(Long idTransaction);
+
+    void deleteHardTransaction(Long idTransaction);
 }

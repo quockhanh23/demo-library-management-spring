@@ -9,6 +9,10 @@ import java.util.List;
 public interface PageBookService {
 
     void createPageBook(PageBook pageBook);
+
     void createPageBooks(List<PageBook> pageBookList);
+
     Page<PageBook> findAllPageBookByIdBook(Long idBook, Pageable pageable);
+
+    PageBook findById(Long idPageBook);
 }

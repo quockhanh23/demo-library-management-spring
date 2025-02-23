@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +29,15 @@ public class PageBookServiceImpl implements PageBookService {
 
     @Override
     public Page<PageBook> findAllPageBookByIdBook(Long idBook, Pageable pageable) {
-        Page<PageBook> pageBooks = pageBookRepository.findAllPageBookByIdBook(idBook, pageable);
-        return pageBooks;
+        return pageBookRepository.findAllPageBookByIdBook(idBook, pageable);
+    }
+
+    @Override
+    public PageBook findById(Long idPageBook) {
+        Optional<PageBook> pageBook = pageBookRepository.findById(idPageBook);
+        if (pageBook.isEmpty()) {
+            throw new RuntimeException("Không tìm thấy");
+        }
+        return pageBook.get();
     }
 }
